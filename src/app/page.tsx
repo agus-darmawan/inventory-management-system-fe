@@ -28,7 +28,9 @@ export default function Home() {
           Daftar
         </Button>
       </section>
-      <footer className="text-xl font-semibold">CV. Mutiara Danatama</footer>
+      <footer className="mt-10 text-center text-sm text-gray-500">
+        <p>CV Mutiara Danatama</p>
+      </footer>
     </main>
   );
 }

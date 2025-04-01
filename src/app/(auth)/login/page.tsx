@@ -19,12 +19,12 @@ import { Input } from "@/components/ui/input";
 const formSchema = z.object({
   email: z
     .string()
-    .email("Please enter a valid email address")
-    .nonempty("Email is required"),
+    .email("Mohon masukan email yang benar")
+    .nonempty("Email wajib diisi"),
   password: z
     .string()
-    .min(6, "Password must be at least 6 characters long")
-    .nonempty("Password is required"),
+    .min(6, "Password minimal 6 karakter")
+    .nonempty("Password wajib diisi"),
 });
 
 export default function LoginPage() {
@@ -37,21 +37,23 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="m-10 mr-auto w-full space-y-6">
-      <h1 className="text-primary text-4xl font-bold text-center w-full">
+    <main className=" flex flex-col items-center justify-between py-2 text-primary w-full h-[85vh]">
+      <h1 className="text-primary text-4xl font-bold text-center w-full py-10">
         Log In
       </h1>
 
-      <section className="mr-auto">
-        <h2 className="text-left text-primary text-3xl font-bold">Welcome</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, quam!
-        </p>
-      </section>
-
-      <section className="mr-auto">
+      <div className="w-full px-10 space-y-8">
+        <section className="mr-auto mb-4">
+          <h2 className="text-left text-primary text-3xl font-bold">
+            Selamat Datang
+          </h2>
+          <p>Silakan masukan akun anda untuk masuk</p>
+        </section>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-5 w-full max-w-md "
+          >
             <FormField
               control={form.control}
               name="email"
@@ -61,16 +63,15 @@ export default function LoginPage() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="m@example.com"
+                      placeholder="contoh@gmail.com"
+                      className="w-full py-5"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>This is your login email.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="password"
@@ -80,13 +81,11 @@ export default function LoginPage() {
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
+                      className="w-full py-5"
+                      placeholder="Masukan password"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
-                    Use at least 6 characters for your password.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -94,14 +93,18 @@ export default function LoginPage() {
 
             <Button
               variant="default"
-              className="px-24 py-7 text-xl rounded-full"
+              className="w-full py-5 text-lg rounded-full"
               type="submit"
             >
               Login
             </Button>
           </form>
         </Form>
-      </section>
+      </div>
+
+      <footer className="mt-10 text-center text-sm text-gray-500">
+        <p>CV Mutiara Danatama</p>
+      </footer>
     </main>
   );
 }
