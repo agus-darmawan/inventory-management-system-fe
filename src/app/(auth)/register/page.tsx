@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { LoginFormData } from "@/types/auth"; // Import Login Form Data Type
+import { RegisterFormData } from "@/types/auth";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,29 +19,39 @@ import Link from "next/link";
 import PasswordInput from "@/components/form/password-input";
 
 const formSchema = z.object({
+  fullName: z
+    .string()
+    .nonempty("Nama lengkap wajib diisi")
+    .min(3, "Nama lengkap minimal 3 karakter"),
   email: z
     .string()
     .email("Mohon masukan email yang benar")
     .nonempty("Email wajib diisi"),
+  phoneNumber: z
+    .string()
+    .nonempty("Nomor HP wajib diisi")
+    .min(10, "Nomor HP minimal 10 karakter")
+    .max(15, "Nomor HP maksimal 15 karakter"),
   password: z
     .string()
     .min(6, "Password minimal 6 karakter")
     .nonempty("Password wajib diisi"),
+  confirmPassword: z.string().nonempty("Konfirmasi password wajib diisi"),
 });
 
-export default function LoginPage() {
-  const form = useForm<LoginFormData>({
+export default function RegisterPage() {
+  const form = useForm<RegisterFormData>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
     console.log("Form submitted with data:", data);
   };
 
   return (
     <main className="flex flex-col items-center justify-between py-2 text-primary w-full h-[85vh]">
       <h1 className="text-primary text-4xl font-bold text-center w-full py-10">
-        Log In
+        Register
       </h1>
 
       <div className="w-full px-10 space-y-8">
@@ -52,6 +62,25 @@ export default function LoginPage() {
           >
             <FormField
               control={form.control}
+              name="fullName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nama Lengkap</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="Nama lengkap"
+                      className="w-full py-5"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
@@ -60,6 +89,25 @@ export default function LoginPage() {
                     <Input
                       type="email"
                       placeholder="contoh@gmail.com"
+                      className="w-full py-5"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nomor HP</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="08xxxxxxxxx"
                       className="w-full py-5"
                       {...field}
                     />
@@ -85,28 +133,36 @@ export default function LoginPage() {
               )}
             />
 
-            <div className="mt-2 text-right">
-              <Link
-                href="/forgot-password"
-                className="text-primary font-semibold"
-              >
-                Lupa password?
-              </Link>
-            </div>
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <PasswordInput
+                    label="Konfirmasi Password"
+                    placeholder="Masukan kembali password"
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <Button
               variant="default"
               className="w-full py-5 text-lg rounded-full"
               type="submit"
             >
-              Login
+              Register
             </Button>
           </form>
         </Form>
 
         <div className="mt-4 text-center">
-          <span>Belum punya akun? </span>
-          <Link href="/register" className="text-primary font-semibold">
-            Daftar
+          <span>Sudah memiliki akun? </span>
+          <Link href="/login" className="text-primary font-semibold">
+            Login
           </Link>
         </div>
       </div>

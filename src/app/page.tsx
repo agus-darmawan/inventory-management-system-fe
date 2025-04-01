@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
-  const onLogin = () => {
-    router.push("/login");
-  };
 
   return (
     <main className=" flex flex-col items-center justify-between py-2 text-primary w-full h-[85vh]">
@@ -20,11 +17,15 @@ export default function Home() {
         <Button
           variant="default"
           className="px-24 py-6 text-xl rounded-full"
-          onClick={onLogin}
+          onClick={() => router.push("/login")}
         >
           Login
         </Button>
-        <Button variant="secondary" className="px-24 py-6 text-xl rounded-full">
+        <Button
+          variant="secondary"
+          className="px-24 py-6 text-xl rounded-full"
+          onClick={() => router.push("/register")}
+        >
           Daftar
         </Button>
       </section>
