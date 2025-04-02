@@ -4,6 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { RegisterFormData } from "@/types/auth";
+import { env } from "@/lib/env";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/use-auth";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,8 +22,8 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import PasswordInput from "@/components/form/password-input";
 
-const formSchema = z.object({
-  fullName: z
+const registerSchema = z.object({
+  full_name: z
     .string()
     .nonempty("Nama lengkap wajib diisi")
     .min(3, "Nama lengkap minimal 3 karakter"),
@@ -27,7 +31,7 @@ const formSchema = z.object({
     .string()
     .email("Mohon masukan email yang benar")
     .nonempty("Email wajib diisi"),
-  phoneNumber: z
+  phone_number: z
     .string()
     .nonempty("Nomor HP wajib diisi")
     .min(10, "Nomor HP minimal 10 karakter")
@@ -36,16 +40,23 @@ const formSchema = z.object({
     .string()
     .min(6, "Password minimal 6 karakter")
     .nonempty("Password wajib diisi"),
-  confirmPassword: z.string().nonempty("Konfirmasi password wajib diisi"),
+  password_confirmation: z.string().nonempty("Konfirmasi password wajib diisi"),
 });
 
 export default function RegisterPage() {
+  const router = useRouter();
+  const { register } = useAuth();
   const form = useForm<RegisterFormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
-    console.log("Form submitted with data:", data);
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
+    try {
+      await register(data);
+      router.push("/login");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -62,7 +73,7 @@ export default function RegisterPage() {
           >
             <FormField
               control={form.control}
-              name="fullName"
+              name="full_name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nama Lengkap</FormLabel>
@@ -100,7 +111,7 @@ export default function RegisterPage() {
 
             <FormField
               control={form.control}
-              name="phoneNumber"
+              name="phone_number"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nomor HP</FormLabel>
@@ -135,7 +146,7 @@ export default function RegisterPage() {
 
             <FormField
               control={form.control}
-              name="confirmPassword"
+              name="password_confirmation"
               render={({ field }) => (
                 <FormItem>
                   <PasswordInput

@@ -3,7 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { LoginFormData } from "@/types/auth"; // Import Login Form Data Type
+import { LoginFormData } from "@/types/auth";
+import { useAuth } from "@/hooks/use-auth";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,12 +32,19 @@ const formSchema = z.object({
 });
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAuth();
   const form = useForm<LoginFormData>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
-    console.log("Form submitted with data:", data);
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+    try {
+      await login(data);
+      // router.push("/home");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
