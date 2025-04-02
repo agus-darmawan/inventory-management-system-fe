@@ -50,7 +50,7 @@ export default function RegisterPage() {
 
   return (
     <main className="flex flex-col items-center justify-between py-2 text-primary w-full h-[85vh]">
-      <h1 className="text-primary text-4xl font-bold text-center w-full py-10">
+      <h1 className="text-primary text-4xl font-bold text-center w-full py-8">
         Register
       </h1>
 
@@ -166,10 +166,6 @@ export default function RegisterPage() {
           </Link>
         </div>
       </div>
-
-      <footer className="mt-10 text-center text-sm text-gray-500">
-        <p>CV Mutiara Danatama</p>
-      </footer>
     </main>
   );
 }
