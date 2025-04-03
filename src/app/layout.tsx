@@ -25,6 +25,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  noStore();
   const { fetchUser } = useAuth();
   const user = await fetchUser();
   return (

@@ -51,9 +51,9 @@
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: #2260FF;
+  --primary: #2260ff;
   --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: #ECF1FF;
+  --secondary: #ecf1ff;
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
   --muted-foreground: oklch(0.554 0.046 257.417);
@@ -85,9 +85,9 @@
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: #2260FF;
+  --primary: #2260ff;
   --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: #ECF1FF;
+  --secondary: #ecf1ff;
   --secondary-foreground: oklch(0.984 0.003 247.858);
   --muted: oklch(0.279 0.041 260.031);
   --muted-foreground: oklch(0.704 0.04 256.788);
@@ -119,4 +119,25 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Kelas debug untuk border dengan warna berbeda */
+.debug-1 {
+  border: 2px solid red;
+}
+
+.debug-2 {
+  border: 2px solid green;
+}
+
+.debug-3 {
+  border: 2px solid blue;
+}
+
+.debug-4 {
+  border: 2px solid orange;
+}
+
+.debug-5 {
+  border: 2px solid purple;
 }

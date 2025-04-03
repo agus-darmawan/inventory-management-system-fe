@@ -12,7 +12,7 @@ const axios = Axios.create({
 axios.interceptors.request.use(async (config) => {
   if (isServer) {
     const { cookies } = await import("next/headers");
-    const token = getCookie("auth.__token", { cookies });
+    const token = await getCookie("auth.__token", { cookies });
 
     if (token) {
       config.headers.Authorization = token ? `Bearer ${token}` : "";

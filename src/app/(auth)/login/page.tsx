@@ -41,7 +41,7 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     try {
       await login(data);
-      // router.push("/home");
+      router.push("/home");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
