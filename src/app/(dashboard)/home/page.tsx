@@ -19,15 +19,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { user, fetchUser, loggedIn, logout } = useAuth();
-  const [loading, setLoading] = useState(true);
 
   const data = [
     {
       name: "Pembelian",
       records: 4,
       icon: <FaShoppingCart size={24} />,
-      link: "/pembelian",
+      link: "/purchases",
     },
     {
       name: "Penjualan",
@@ -56,52 +54,9 @@ export default function DashboardPage() {
     { name: "Stock", records: 4, icon: <FaCube size={24} />, link: "/stock" },
   ];
 
-  useEffect(() => {
-    if (loggedIn) {
-      fetchUser().finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
-  }, [loggedIn, fetchUser]);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      router.push("/login");
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   return (
-    <main className="flex flex-col items-center py-2 text-primary w-full">
-      <section className="text-center flex flex-row justify-between w-full px-5 my-5 items-center">
-        <figure className="flex flex-row items-center space-x-2 gap-2">
-          <Image
-            src={"/avatar.png"}
-            alt="User Avatar"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <figcaption className="text-left leading-snug">
-            <h1 className="text-sm">
-              Selamat datang {user?.user?.role === "admin" ? "Admin" : ""}
-            </h1>
-            <h2 className="font-semibold">{user?.user?.fullName}</h2>
-          </figcaption>
-        </figure>
-        <Button
-          variant={"outline"}
-          onClick={handleLogout}
-          className="p-2 rounded-full h-8 w-8"
-          aria-label="Logout"
-        >
-          <FaSignOutAlt size={20} />
-        </Button>
-      </section>
-
-      <section className="flex flex-col w-full bg-gradient-to-r from-blue-400 via-blue-500 h-40 to-blue-600 p-3 text-white rounded-lg shadow-md my-2 ">
+    <div className="flex flex-col items-center py-2 text-primary w-full">
+      <section className="flex flex-col w-full bg-gradient-to-r from-blue-400 via-blue-500 h-40 to-blue-600 p-3 text-white rounded-lg shadow-md mb-2 ">
         <h1 className="text-xl text-center font-semibold mb-3">Pengumuman</h1>
       </section>
       <h1 className="text-xl text-center font-semibold mt-3 mb-2">Menu</h1>
@@ -125,6 +80,6 @@ export default function DashboardPage() {
           ))}
         </ScrollArea>
       </section>
-    </main>
+    </div>
   );
 }
