@@ -2,7 +2,6 @@ import axios from "@/lib/axios";
 import { deleteCookie, setCookie } from "@/lib/cookie";
 
 import { useStore } from "@/store";
-import { getCookie } from "@/lib/cookie";
 
 import {
   RegisterFormData,

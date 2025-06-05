@@ -1,9 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "@/hooks/use-auth";
-import Image from "next/image";
+import React from "react";
 import {
-  FaSignOutAlt,
   FaChevronRight,
   FaShoppingCart,
   FaChartLine,
@@ -12,14 +9,10 @@ import {
   FaFileAlt,
   FaCube,
 } from "react-icons/fa"; // Importing React Icons
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function DashboardPage() {
-  const router = useRouter();
-
   const data = [
     {
       name: "Pembelian",

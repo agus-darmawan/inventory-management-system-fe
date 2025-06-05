@@ -6,7 +6,7 @@ import {
 
 export const setCookie = (
   key: string,
-  value: any,
+  value: string,
   args = {
     maxAge: 31536000,
     path: "/",
@@ -16,10 +16,16 @@ export const setCookie = (
   set(key, value, args);
 };
 
-export const getCookie = (key: string, options?: {}) => {
+interface CookieOptions {
+  maxAge?: number;
+  path?: string;
+  secure?: boolean;
+}
+
+export const getCookie = (key: string, options?: CookieOptions) => {
   return get(key, options);
 };
 
-export const deleteCookie = (key: string, options?: {}) => {
+export const deleteCookie = (key: string, options?: CookieOptions) => {
   return destroy(key, options);
 };

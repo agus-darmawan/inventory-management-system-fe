@@ -4,7 +4,15 @@ import { useRef } from "react";
 import { useStore } from "@/store";
 
 type IState = {
-  auth: any;
+  auth: {
+    id: number;
+    full_name: string;
+    email: string;
+    phone_number: string;
+    email_verified_at: string | null;
+    created_at: string;
+    updated_at: string;
+  } | null;
 };
 
 const StoreInitializer = ({ auth }: IState) => {

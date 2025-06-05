@@ -12,16 +12,14 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useForm, FormProvider } from "react-hook-form";
-import { Form, FormItem, FormLabel, FormControl } from "@/components/ui/form";
+import { FormItem, FormLabel, FormControl } from "@/components/ui/form";
 import {
   Table,
   TableHeader,
   TableBody,
-  TableFooter,
   TableRow,
   TableHead,
   TableCell,
-  TableCaption,
 } from "@/components/ui/table";
 
 type FormData = {
