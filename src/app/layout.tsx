@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import StoreInitializer from "@/store/store-initializer";
-import { useAuth } from "@/hooks/use-auth";
 import { unstable_noStore as noStore } from "next/cache";
 import "./globals.css";
 
@@ -27,14 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   noStore();
-  const { fetchUser } = useAuth();
-  const user = fetchUser();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} border-2 antialiased flex justify-center min-h-screen max-h-screen min-w-sm max-w-md mx-auto`}
       >
-        <StoreInitializer auth={user} />
         {children}
       </body>
     </html>

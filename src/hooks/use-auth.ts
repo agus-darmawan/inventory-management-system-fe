@@ -96,7 +96,7 @@ export const useAuth = () => {
   return {
     user: useStore.getState().auth,
     loggedIn: !!useStore.getState().auth,
-    isEmailVerified: !!useStore.getState()?.auth?.user?.email_verified_at,
+    isEmailVerified: !!useStore.getState()?.auth?.email_verified_at,
     fetchUser,
     login,
     register,

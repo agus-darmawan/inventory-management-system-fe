@@ -14,7 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { loggedIn, user, logout } = useAuth();
+  const { loggedIn, logout } = useAuth();
 
   useEffect(() => {
     if (!loggedIn) {
@@ -42,10 +42,7 @@ export default function DashboardLayout({
             className="rounded-full"
           />
           <figcaption className="text-left leading-snug">
-            <h1 className="text-sm">
-              Selamat datang {user?.user?.role === "admin" ? "Admin" : ""}
-            </h1>
-            <h2 className="font-semibold">{user?.user?.fullName}</h2>
+            <h1 className="text-sm"></h1>
           </figcaption>
         </figure>
         <Button
